@@ -22,7 +22,7 @@ $webResourceManager.requireResource("ru.sds.plugialo.absenter:planner-resources"
                     #set($type="recurrent")
                 #end
                        #if($type=="Others")
-                        <span class="aui-lozenge">Others</span>
+                            <span class="aui-lozenge">Others</span>
                        #elseif ($type=="Holiday" || $type=="Vacation")
                             <span class="sg-planner-AbsenceInfo-icon" title="Holiday"> </span> $type<br/>
                        #elseif($type=="Business Trip")

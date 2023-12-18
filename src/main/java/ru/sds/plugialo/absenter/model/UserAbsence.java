@@ -188,6 +188,39 @@ public class UserAbsence {
         return zDateTime.toLocalDate();
     }
 
+    public static String getTypeKey(String absenceType) {
+
+        String result = "locale.jira.absenceplanner.others";
+
+        switch (absenceType) {
+            case "Business Trip":
+                result = "locale.jira.absenceplanner.btrip";
+                break;
+            case "Training":
+                result = "locale.jira.absenceplanner.training";
+                break;
+            case "Holiday":
+                result = "locale.jira.absenceplanner.vacation";
+                break;
+            case "Sickness":
+                result = "locale.jira.absenceplanner.sickness";
+                break;
+            case "Conference":
+                result = "locale.jira.absenceplanner.conference";
+                break;
+            case "Trade Fair":
+                result = "locale.jira.absenceplanner.trade";
+                break;
+            case "Long Term Leave":
+                result = "locale.jira.absenceplanner.longleave";
+                break;
+            default:
+                result = "locale.jira.absenceplanner.others";
+        }
+
+        return result;
+    }
+
     public String getUIFormattedSate(long milliseconds) {
         return Utils.getLocalDateFromEpoch(milliseconds);
     }

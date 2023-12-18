@@ -379,6 +379,7 @@ public class UserAbsencePlannerRest {
 
             if (now.compareTo(start) >= 0 && now.compareTo(end) <= 0) {
                 contextParameters.put("userAbsenceEntry", userAbsence);
+                contextParameters.put("userAbsenceType", i18n.getText(UserAbsence.getTypeKey(userAbsence.getType())));
                 String str = ComponentAccessor.getVelocityManager().getBody("/templates/", templateName, contextParameters);
                 return Response.ok(str).build();
             }
@@ -387,6 +388,7 @@ public class UserAbsencePlannerRest {
                 String days = userAbsence.getRecurringDays();
                 if (days != null && days.contains(Utils.getTodayName())) {
                     contextParameters.put("userAbsenceEntry", userAbsence);
+                    contextParameters.put("userAbsenceType", i18n.getText(UserAbsence.getTypeKey(userAbsence.getType())));
                     String str = ComponentAccessor.getVelocityManager().getBody("/templates/", templateName, contextParameters);
                 }
             }
@@ -397,6 +399,7 @@ public class UserAbsencePlannerRest {
                 String days = userAbsence.getRecurringDays();
                 if (days != null && days.contains(Utils.getTodayName())) {
                     contextParameters.put("userAbsenceEntry", userAbsence);
+                    contextParameters.put("userAbsenceType", i18n.getText(UserAbsence.getTypeKey(userAbsence.getType())));
                     String str = ComponentAccessor.getVelocityManager().getBody("/templates/", templateName, contextParameters);
                 }
             }
