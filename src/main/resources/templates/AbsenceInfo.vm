@@ -1,0 +1,76 @@
+$webResourceManager.requireResource("ru.sds.plugialo.absenter:planner-resources")
+
+<div id="sg-planner-absenceInfo">
+
+#if($userAbsenceEntry)
+
+<table class="aui">
+<tr>
+<th>Status</th>
+<th>Absence Type</th>
+<th>Period</th>
+
+</tr>
+
+<tr>
+<td>    <div  style="margin-top:5px;margin-left:20px" title="User is out of the office - Absence Type: $userAbsenceEntry.getType() - From: $userAbsenceEntry.getPlannerDate($userAbsenceEntry.getStartDate()) To : $userAbsenceEntry.getPlannerDate($userAbsenceEntry.getEndDate()) - Message: $userAbsenceEntry.getMessage()" class="userAbsent-led"></div>
+</td>
+<td> 
+            <div class="sg-planner-notAvailable">
+                #set($type= $userAbsenceEntry.getType())
+                #if($type==-1)
+                    #set($type="recurrent")
+                #end
+                       #if($type=="Others")
+                        <span class="aui-lozenge">Others</span>
+                       #elseif ($type=="Holiday" || $type=="Vacation")
+                            <span class="sg-planner-AbsenceInfo-icon" title="Holiday"> </span> $type<br/>
+                       #elseif($type=="Business Trip")
+                            <span class="sg-planner-business-trip" title="Business Trip"> </span> $type<br/>
+                        #elseif($type=="Overtime reduction")
+                            <span class="sg-planner-overtime" title="Overtime reduction Trip"> </span> $type<br/>
+                       #elseif($type=="Maternity or Paternity")
+                            <span class="sg-planner-matpaternity" title="Maternity or Paternity"> </span> $type<br/>
+                        #elseif($type=="Conference")
+                            <span class="sg-planner-conference" title="Conference"> </span> $type<br/>
+                        #elseif($type=="Trade Fair")
+                            <span class="sg-planner-TradeFair" title="Trade Fair"> </span> $type<br/>
+                        #elseif($type=="Training")
+                            <span class="sg-planner-training" title="Training"> </span> $type<br/>
+                        #elseif($type=="Sickness")
+                            <span class="sg-planner-illness" title="Sickness"> </span> $type<br/>
+                        #elseif($type=="Long Term Leave")
+                            <span class="sg-Long-term-leave" title="Long Term Leave"> </span> $type<br/>
+                         #elseif ($type=="recurrent" || $type=="Recurrent")
+                            <span class="sg-planner-recurringAbsence" title="Recurrent"> </span> <br/>
+                        #else
+                         $type
+                       #end
+            </div>
+            </td>
+            <td>
+                
+               #if ($type=="recurrent" )
+                    <span style="font-size:14px;color:#505F79" > Every $userAbsenceEntry.getRecurringDays() </span>
+               #else 
+                <span style="font-size:14px;color:#505F79" > <b>$i18n.getText("locale.jira.absenceplanner.from"):</b>  $userAbsenceEntry.getPlannerDate($userAbsenceEntry.getStartDate()) <br/><b>$i18n.getText("locale.jira.absenceplanner.to"):</b> $userAbsenceEntry.getPlannerDate($userAbsenceEntry.getEndDate())</span>
+                #end
+            </td>
+</tr>
+    
+</table>
+   #else
+        #if($isLoggedIn)
+            <div title="User is online since $lastLoginTime" style="margin-left:20px;margin-top:20px;" class="userOnline-led"></div></h3>
+        #else
+            #if($lastLoginTime)
+            <div  title="Offline - User last login was on: $lastLoginTime" style="margin-left:20px;margin-top:20px;" class="userOffline-led"></div></h3>
+            #else
+            <div  title="User is offline" class="userOffline-led" style="margin-left:20px;margin-top:20px;"></div></h3>
+            #end
+
+        #end
+        
+    
+    #end
+</div>

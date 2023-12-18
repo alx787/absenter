@@ -1,0 +1,53 @@
+
+<button id="sg-planner-configdialog-show-button" class="aui-button" resolved="" style="margin-left:10px;float:right;">
+          <span class="aui-icon aui-icon-small aui-iconfont-configure">Configure</span>
+</button>
+<section id="sg-planner-config-dialog" class="aui-dialog2 aui-dialog2-small aui-layer" role="dialog" aria-hidden="true" style="width:500px">
+    <header class="aui-dialog2-header">
+        <h2 class="aui-dialog2-header-main">Configuration</h2>
+        <a class="aui-dialog2-header-close" id="sg-close-dialog">
+            <span class="aui-icon aui-icon-small aui-iconfont-close-dialog">Close</span>
+        </a>
+    </header>
+    <div class="aui-dialog2-content">
+        <form class="aui">
+        <div class="field-group">
+            <label for="sg-planner-locum">$i18n.getText("locale.jira.absenceplanner.locum") </label>
+            ##<input class="text" type="text" id="sg-planner-locum" name="sg-planner-locum" title="Locum">
+            <select id="sg_representatives" class="sg_representatives">
+                #if($representative)
+                    <option value="$representative.getUsername()"  selected=true>$representative.getDisplayName()</option>
+                #end
+            </select>
+            <div class="description">$i18n.getText("locale.jira.absenceplanner.locum.desc")</div>
+
+        </div>
+        
+        #*<div class="field-group">
+           <label for="sg-planner-assignable">$i18n.getText("locale.jira.absenceplanner.assignable") </label>
+            <input type="checkbox" id="sg-planner-assignable" class="checkbox" name="Assign issues automatically">
+            <label for="sg-planner-assignable">Re assign issues during my absences</label>
+
+            <div class="description">$i18n.getText("locale.jira.absenceplanner.assignable.desc")</div>
+            
+        </div>*#
+
+        <fieldset class="group field-group"  id="sg-autoreassign" >
+            ##<legend><span></span></legend>
+            <div class="checkboxs">
+                <input type="checkbox" id="sg-planner-assignable" class="checkbox" #if($assignable) checked #end  name="Assign issues automatically">
+                <label for="sg-planner-assignable">$i18n.getText("locale.jira.absenceplanner.assignable") </label>
+            </div>
+             <div class="checkboxs">
+                <input type="checkbox" id="sg-planner-comment" class="checkbox" #if($commentable) checked #end name="Comment on issue" #if($commentDisabled) disabled  title="Auto Comment is disabled by administrator"#end>
+                <label for="sg-planner-comment">$i18n.getText("locale.jira.absenceplanner.comment") </label>
+            </div>
+        </fieldset>
+        </form>
+    </div>
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <button id="sg-config-dialog-submit-button" class="aui-button aui-button-primary">Save</button>
+        </div>
+    </footer>
+</section>

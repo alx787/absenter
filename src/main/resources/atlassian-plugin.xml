@@ -1,0 +1,134 @@
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}"/>
+        <param name="plugin-icon">images/pluginIcon.png</param>
+        <param name="plugin-logo">images/pluginLogo.png</param>
+    </plugin-info>
+
+    <!-- add our i18n resource -->
+<!--    <resource type="i18n" name="i18n" location="absenter"/>-->
+
+    <!-- add our web resources -->
+<!--    <web-resource key="absenter-resources" name="absenter Web Resources">-->
+<!--        <dependency>com.atlassian.auiplugin:ajs</dependency>-->
+
+<!--        <resource type="download" name="absenter.css" location="/css/absenter.css"/>-->
+<!--        <resource type="download" name="absenter.js" location="/js/absenter.js"/>-->
+<!--        <resource type="download" name="images/" location="/images"/>-->
+
+<!--        <context>absenter</context>-->
+<!--    </web-resource>-->
+
+
+    <resource type="download" name="pluginIcon" location="/images/User_Absence_Planner.png"/>
+    <resource type="i18n" name="i18n" location="absenter"/>
+    <resource type="download" name="images/" location="images/"/>
+    <resource type="download" name="VacationIcon" location="images/Holiday.png"/>
+    <resource type="download" name="business-trip" location="images/Business_Trip.png"/>
+    <resource type="download" name="Sickness" location="images/Sickness.png"/>
+    <resource type="download" name="visitor" location="images/Conference.png"/>
+    <resource type="download" name="stroller" location="images/stroller.png"/>
+    <resource type="download" name="overtime" location="images/overtime.png"/>
+    <resource type="download" name="tradefair" location="images/TradeFair.png"/>
+    <resource type="download" name="training" location="images/training.png"/>
+    <resource type="download" name="Long_term_leave" location="images/Long_term_leave.png"/>
+    <resource type="download" name="recurringAbsence" location="images/recurrentIcon.png"/>
+
+    <web-resource key="planner-resources" name="Planner Web Resources">
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+        <dependency>com.atlassian.auiplugin:aui-select2</dependency>
+        <dependency>com.atlassian.auiplugin:dialog2</dependency>
+        <dependency>com.atlassian.auiplugin:aui-date-picker</dependency>
+        <resource type="download" name="planner.css" location="/css/planner.css"/>
+        <resource type="download" name="planner.js" location="/js/planner.js"/>
+        <resource type="download" location="/css/main.css" name="main.css"/>
+        <resource type="download" location="/js/main.js" name="main.js"/>
+        <resource type="download" name="images/" location="/images"/>
+        <context>atl.general</context>
+    </web-resource>
+    <web-resource key="issueview-resources" name="IssueView Web Resources">
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+        <resource type="download" name="issueview.css" location="/css/issueview.css"/>
+        <resource type="download" name="issueview.js" location="/js/issueview.js"/>
+        <resource type="download" name="images/" location="/images"/>
+        <context>atl.general</context>
+    </web-resource>
+
+    <ao key="ao-userabsence">
+        <description>The module configuring the Active Objects service used by this plugin</description>
+        <entity>ru.sds.plugialo.absenter.ao.AbsenceEntity</entity>
+    </ao>
+
+    <view-profile-panel key="user-absenceplanner-panel" i18n-name-key="UserAbsencePlanner.panel.title"
+                        name="User Absence Planner Panel" class="ru.sds.plugialo.absenter.ui.UserAbsencePanel">
+        <resource type="velocity" name="view" location="templates/UserAbsencePlanner.vm"/>
+        <param name="summary">true</param>
+        <conditions type="AND">
+            <condition class="ru.sds.plugialo.absenter.conditions.AccessCondition"></condition>
+            <condition class="com.atlassian.jira.plugins.userprofile.conditions.UserCanBrowseProfileUserProjects"></condition>
+        </conditions>
+        <order>50</order>
+    </view-profile-panel>
+
+    <web-panel key="user-absencestatus-profile-panel" location="webpanels.user.profile.summary.custom" weight="10"
+               class="ru.sds.plugialo.absenter.ui.UserAbsenceStatusPanel">
+        <resource name="view" type="velocity" location="templates/UserAbsenceStatus.vm"></resource>
+        <condition class="ru.sds.plugialo.absenter.conditions.AccessCondition"></condition>
+    </web-panel>
+
+    <rest key="user-absenceplanner-rest" path="/absenter" version="1.0">
+        <description>rest services for user absence planner</description>
+    </rest>
+
+    <web-item key="user-absenceplanner-profile-menu" section="system.user.options/personal" weight="10">
+        <description>Link to Absence Planner Tab under user profile</description>
+        <label key="locale.jira.absenceplanner.item.absenceplanner.label">Absence Planner</label>
+        <link linkId="absenceplanner-item" absolute="false">
+            /secure/ViewProfile.jspa?selectedTab=ru.sds.plugialo.absenter.UserAbsencePlanner:user-absenceplanner-panel
+        </link>
+        <condition class="ru.sds.plugialo.absenter.conditions.AccessCondition"></condition>
+    </web-item>
+
+    <jql-function name="absentUsers" i18n-name-key="absentUsers.name" key="absentUsers"
+                  class="ru.sds.plugialo.absenter.jql.AbsentUsersJQL">
+        <description key="absentUsers.summary">absentUsers</description>
+        <fname>absentUsers</fname>
+        <list>true</list>
+    </jql-function>
+    <jql-function name="notAvailableUsers" i18n-name-key="absentUsers.name" key="notavailableUsers"
+                  class="ru.sds.plugialo.absenter.jql.AbsentUsersJQL">
+        <description key="notAvailableUsers.summary">notAvailableUsers</description>
+        <fname>notAvailableUsers</fname>
+        <list>true</list>
+    </jql-function>
+
+    <web-section key="userabsenceplanner_adminpage" location="admin_plugins_menu">
+        <label key="User Absences Planner"/>
+    </web-section>
+
+    <web-item key="userabsenceplanner-admin-config-link"
+              section="admin_plugins_menu/userabsenceplanner_adminpage">
+        <label key="Absences Settings"/>
+        <link>/secure/admin/UserAbsencePlannerConfiguration!default.jspa</link>
+    </web-item>
+
+    <webwork1 key="userabsenceplanner-admin-config" name="Configuration" class="java.lang.Object">
+        <actions>
+            <action name="ru.sds.plugialo.absenter.actions.UserAbsencePlannerConfiguration"
+                    alias="UserAbsencePlannerConfiguration">
+                <view name="input" type="velocity">/templates/webwork/config-page.vm</view>
+            </action>
+        </actions>
+    </webwork1>
+
+    <web-resource key="planner_admin.css-resources" name="Planner Web Resources">
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+        <resource type="download" name="planner_admin.css" location="/css/planner_admin.css"/>
+        <resource type="download" name="planner_admin.js" location="/js/planner_admin.js"/>
+        <resource type="download" name="images/" location="/images"/>
+        <context>UserAbsencePlanner</context>
+    </web-resource>
+
+</atlassian-plugin>

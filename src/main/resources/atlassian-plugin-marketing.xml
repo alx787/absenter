@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<atlassian-plugin-marketing>
+    <compatibility>
+        <product name="jira" min="8.0.0" max="8.16.0"/>
+    </compatibility>
+    <logo image="images/Logo_RS.png"/>
+    <banner image="images/Logo_RS.png"/>
+    <highlights>
+        <highlight image="images/Logo_GTA5.png" cropped="images/Logo_GTA5.png"/>
+        <highlight image="images/Logo_GTA5_all.png" cropped="images/Logo_GTA5_all.png"/>
+        <highlight image="images/Logo_GTA5_title.png" cropped="images/Logo_GTA5_title.png"/>
+        <highlight image="images/Logo_GTA5_tittle_main.png" cropped="images/Logo_GTA5_tittle_main.png"/>
+        <highlight image="images/Logo_GTA6.png" cropped="images/Logo_GTA6.png"/>
+    </highlights>
+    <screenshots>
+        <screenshot image="images/Logo_GTA5.png"/>
+        <screenshot image="images/Logo_GTA5_all.png"/>
+        <screenshot image="images/Logo_GTA5_tittle_main.png"/>
+        <screenshot image="images/Logo_GTA5_tittle_main.png.png"/>
+        <screenshot image="images/Logo_GTA6.png.png"/>
+    </screenshots>
+</atlassian-plugin-marketing>

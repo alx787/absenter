@@ -1,0 +1,174 @@
+<html>
+    <head>
+        <title>Planner Settings</title>
+        <meta name="decorator" content="atl.admin"/>
+        <meta name="admin.active.section" content="userabsenceplanner-admin-config"/>
+        $webResourceManager.requireResource("com.atlassian.auiplugin:aui-select2")
+        $webResourceManager.requireResource("ru.sds.plugialo.absenter:planner_admin.css-resources")
+
+    </head>
+    <body>
+
+        <div>
+            <h2><img
+                src="$action.getIconURL()/download/resources/ru.sds.plugialo.absenter:planner_admin.css-resources/pluginIcon"
+                height="24"
+                width="24"
+                border="0"
+                align="absmiddle"
+                style="">
+                User Absences Planner Configuration</h2>
+                <hr/>
+                <h3>Settings</h3>
+            <div style="margin-top:20px">
+                <p>
+                    On this page, you can define who can use the app and who can edit absences for other users. 
+                    Please find additional information in our
+                    <a href="https://docs.ij-solutions.com/uap/" target="blank">documentation</a>.
+                </p>
+            </div>
+        </div>
+        #*<div><h3>User Absences Configuration Page  | <a href="https://ij-solutions.atlassian.net/wiki/spaces/ECP/overview" target="blank">  
+        <img
+            src="$action.getIconURL()/download/resources/locale.jira.absenceplanner.UserAbsencePlanner:planner_admin.css-resources/pluginIcon"
+            height="24"
+            width="24"
+            border="0"
+            align="absmiddle">
+        User Absences Documentation</a>
+</h3>
+</div>*# 
+
+#set($PlannerConfig = $action.getCurrentSecuritySettings())
+<form class="aui">
+#parse("/templates/webwork/access-limit.vm")
+
+<h3>User Absences Administration</h3>
+
+<div class="field-group">
+    <label >Administration limited to</label>
+    <div class="checkbox">
+        <input
+            class="checkbox"
+            type="checkbox"
+            name="sysAdministrators"
+            id="sysAdministrators"
+            #if($PlannerConfig.isEnabledForSystemAdmins()) checked="checked"
+            #end>
+        <label for="sysAdministrators">Jira Administrators</label>
+    </div>
+
+</div>
+
+<div class="field-group">
+    <label for="sg-selected-groups">Groups:</label>
+    #set($jiraGroups = $action.getGroups())
+
+    <select id="sg-selected-groups" style="width:300px !important">
+        <option value="-1">Select Group</option>
+        #foreach($group in $jiraGroups)
+            <option value="$group">$group</option>
+        #end
+    </select>
+    <span class="sgAddOption" id="sgplanner_add_group_users">
+        <span class="aui-icon aui-icon-small aui-iconfont-add"></span>
+        Add
+    </span>
+    <div class="field-group">
+        <label>Administrator Groups</label>
+        <div id="sgplanner_display_div_users">
+            #if($PlannerConfig.getGroups() && $PlannerConfig.getGroups().length()>0)
+                #foreach($group in $PlannerConfig.getGroups().split(","))
+                    <div class="groupItem" groupname="$group" style="" id="sgplanner_div_$velocityCount_users">
+                        <div id="sgplanner_div_$velocityCount_inner_users" title="">
+                            <span class="aui-icon aui-icon-small aui-iconfont-admin-roles sgUsersIcon" style="">Group</span>
+                            <span id="sgplanner_div_$velocityCount_inner_users_span">
+                                <b>Group</b>: $group</span>
+                            <span class="aui-icon aui-icon-small aui-iconfont-delete groupTrash" style="">Delete Group</span>
+                        </div>
+                    </div>
+                #end 
+            #end 
+        </div>
+
+    </div>
+    <div class="description">Only users in the selected groups are allowed to create and edit  absences for other users
+       </div>
+</div>
+
+<div>
+        <div class="field-group">
+            <label for="sg_permittedUsers">Users :</label>
+            <select id="sg_permittedUsers" class="sg_permittedUsers" style="width:300px !important">
+                 <option value="-1"  selected=true>Select User</option>
+
+                #foreach($user in $PlannerConfig.getUsers().split(","))
+                    #set($PlannerUser=$action.getPermittedUser($user))
+                    #if($!PlannerUser)
+                    <option value="$PlannerUser.getName()"  >$PlannerUser.getDisplayName()</option>
+                    #end
+                #end
+            </select>
+            <span class="sgAddOption" id="sgplanner_add_user_users">
+                    <span class="aui-icon aui-icon-small aui-iconfont-add"></span>
+                    Add
+            </span>
+            <div class="field-group">
+                <label>Administrator Users</label>
+                <div id="sgplanner_display_div_permittedusers">
+                    #if($PlannerConfig.getUsers() && $PlannerConfig.getUsers().length()>0)
+                        #foreach($user in $PlannerConfig.getUsers().split(","))
+                            #set($PlannerUser= $action.getPermittedUser($user))
+                            #if($!PlannerUser)
+                                <div class="userItem" userName="$user" style="" >
+                                    <div  title="">
+                                        <span class="aui-icon aui-icon-small aui-iconfont-admin-roles sgUsersIcon" style="">User</span>
+                                        <span>
+                                            <b>User</b>: $PlannerUser.getDisplayName()</span>
+                                        <span class="aui-icon aui-icon-small aui-iconfont-delete userTrash" style="">Delete User</span>
+                                    </div>
+                                </div>
+
+                            #end
+                        #end 
+                    #end 
+                </div>
+            </div>
+           ## <input type="text" id="sg_permittedUsers" name="sg_permittedUsers" />
+            <div class="description">$i18n.getText("locale.jira.absenceplanner.permitted.desc")</div>
+        </div>
+
+</div>
+
+##$PlannerConfig.isDisableAutoComment()
+<h3>User Absences Comments</h3>
+<div class="field-group">
+    <label for="disableAutoComment">Comments</label>
+    <div class="checkbox">
+        <input
+            class="checkbox"
+            type="checkbox"
+            name="disableAutoComment"
+            id="disableAutoComment" 
+            #if($PlannerConfig.isDisableAutoComment())
+            checked="checked"
+            #end>
+        <label for="disableAutoComment">Disable Auto Comment</label>
+    </div>
+</div>
+
+##<hr/>
+<br/>
+<br/>
+<div class="buttons-container">
+    <div class="buttons">
+        ##<input class="button aui-button-primary" type="button" value="Save" id="sg-update-configs">
+        ## <a class="cancel" href="#">Cancel</a>
+        <button class="aui-button aui-button-primary" id="sg-update-configs">Save</button>
+
+    </div>
+</div>
+
+</form>
+</body>
+</html>

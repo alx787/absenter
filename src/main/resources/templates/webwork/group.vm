@@ -1,0 +1,14 @@
+<div class="groupItem" style="" id="sgclonediv_0_users">
+    <div id="sgclonediv_0_inner_users" title="">
+        <span class="aui-icon aui-icon-small aui-iconfont-admin-roles" style="">Group</span>
+        <span id="sgclonediv_0_inner_users_span"><b>Group</b>: confluence-users</span>
+        <span class="aui-icon aui-icon-small aui-iconfont-delete groupTrash" style="">Delete Group</span>
+    </div>
+</div>
+<div class="groupItem" style="" id="sgclonediv_1_users">
+    <div id="sgclonediv_1_inner_users" title="">
+        <span class="aui-icon aui-icon-small aui-iconfont-admin-roles" style="">Group</span>
+        <span id="sgclonediv_1_inner_users_span"><b>Group</b>: confluence-users</span>
+        <span class="aui-icon aui-icon-small aui-iconfont-delete groupTrash" style="">Delete Group</span>
+    </div>
+</div>

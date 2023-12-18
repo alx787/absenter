@@ -1,0 +1,150 @@
+$webResourceManager.requireResource("ru.sds.plugialo.absenter:planner-resources")
+$webResourceManager.requireResource("com.atlassian.auiplugin:aui-date-picker")
+$webResourceManager.requireResource("com.atlassian.auiplugin:dialog2")
+
+
+<div style="margin-bottom:10px">
+    <aui-spinner size="small" id="sg-planner-absence-status-loader"></aui-spinner>
+    <div id="sg-planner-absence-status">
+    </div>
+</div>
+     ## <input type="hidden" id="profileUserName" value="$userOfProfile"/>
+###<h4> Welcome to UAP Debugger : $userOfProfile </h4>
+###$userAbsencesList
+ #if($isEditor)
+##        #if($isLicenseValid ==false)
+##            <span class="aui-lozenge aui-lozenge-error" style="float:right;" >License not valid</span>
+##        #else
+            #parse("templates/PlannerConfig.vm")
+            <button class="aui-button aui-button-primary"  id="sg-add-new-absence-dialog" style="float:right;" >
+                    <span class="aui-icon aui-icon-small aui-iconfont-add"></span> $i18n.getText("locale.jira.absenceplanner.button.add")
+            </button>
+             <button class="aui-button aui-button-primary"  id="sg-add-new-reg-absence-dialog" style="margin-right:10px;float:right;" >
+                    <span class="aui-icon aui-icon-small aui-iconfont-add"></span>$i18n.getText("locale.jira.absenceplanner.regular.name")
+
+            </button>
+##        #end
+#end
+<section id="sg-planner-add-absence-dialog" class="aui-dialog2 aui-dialog2-small aui-layer" role="dialog" aria-hidden="true" style="width:600px">
+    <header class="aui-dialog2-header">
+        <h2 class="aui-dialog2-header-main">$i18n.getText("locale.jira.absenceplanner.dialog.title")</h2>
+        <a class="aui-dialog2-header-close">
+            <span class="aui-icon aui-icon-small aui-iconfont-close-dialog" id="sg-planner-close-dialog">Close</span>
+        </a>
+    </header>
+    <div class="aui-dialog2-content">
+       <input type="hidden" id="profileUserName" value="$userOfProfile"/>
+###<h4 > Welcome to UAP Debugger : $userOfProfile </h4>
+<input type="hidden" id="sg-planner-reporter" value="$currentUser"/>
+<div style="width:100%;display:inline-flex">
+<div style="width:100%;">
+<form class="aui">
+        <div class="field-group">
+            <label for="sg-planner-summary">$i18n.getText("locale.jira.absenceplanner.summary") <span class="aui-icon icon-required">required</span></label>
+            <input class="text" type="text" id="sg-planner-summary" name="sg-planner-summary" title="Summary">
+            <div class="description">$i18n.getText("locale.jira.absenceplanner.summary.desc")</div>
+        </div>
+         <div class="field-group" id="sg-fromToContainer" >
+            <label for="sg-planner-notAvailable">$i18n.getText("locale.jira.absenceplanner.notAvailable") <span class="aui-icon icon-required">required</span></label>
+            <span style="color: var(--aui-form-label-text-color);font-weight: 500;font-size: 14px;"> $i18n.getText("locale.jira.absenceplanner.from") </span>
+            <input class="aui-date-picker text medium-field" style="width:90px" id="sg-planner-from" type="date"  min="2020-12-20" />
+            <span style="color: var(--aui-form-label-text-color);font-weight: 500;font-size: 14px;" > $i18n.getText("locale.jira.absenceplanner.to") </span>
+            <input class="aui-date-picker text medium-field" id="sg-planner-to" style="width:90px" type="date" min="2020-12-20"/>
+            <div class="description">$i18n.getText("locale.jira.absenceplanner.notAvailable.desc")</div>
+        </div>  
+        <div class="field-group" id="sg-absenceTypeContainer">
+           <label for="sg-planner-type">$i18n.getText("locale.jira.absenceplanner.type")<span class="aui-icon icon-required">required</span></label>
+            <select id="sg-planner-type" style="width:200px">
+                <option value="-1">Select Absence Type</option>
+                <option value="Business Trip">$i18n.getText("locale.jira.absenceplanner.btrip")</option>
+                <option value="Training">$i18n.getText("locale.jira.absenceplanner.training")</option>
+                <option value="Holiday">$i18n.getText("locale.jira.absenceplanner.vacation")</option>
+                <option value="Sickness">$i18n.getText("locale.jira.absenceplanner.sickness")</option>
+                <option value="Conference">$i18n.getText("locale.jira.absenceplanner.conference")</option>
+                <option value="Trade Fair">$i18n.getText("locale.jira.absenceplanner.trade")</option>
+                <option value="Long Term Leave">$i18n.getText("locale.jira.absenceplanner.longleave")</option>
+
+                ##<option value="Overtime reduction">Overtime reduction</option>
+                ##<option value="Bereavement">Bereavement</option>
+                ##<option value="Maternity or Paternity">Maternity or Paternity</option>
+                ##<option value="Unpaid leave">Unpaid leave</option>
+                ##<option value="Sabbatical">Sabbatical</option>
+                <option value="Others">$i18n.getText("locale.jira.absenceplanner.others")</option>
+
+            </select>
+        </div>
+       #* <div class="field-group" id="sg-regDaysContainer" style="display:none">
+           <label for="sg-planner-type">$i18n.getText("locale.jira.absenceplanner.type")<span class="aui-icon icon-required">required</span></label>
+            
+        </div>*#
+
+        <fieldset class="group field-group"  id="sg-regDaysContainer" style="display:none">
+            <legend><span>Regular absence on:</span></legend>
+            <div class="checkboxs">
+                <input class="checkbox sg_recurring" type="checkbox" name="Monday" id="Monday">
+                <label for="monday">Monday</label>
+            </div>
+            <div class="checkboxs">
+                <input class="checkbox sg_recurring" type="checkbox" name="Tuesday" id="Tuesday">
+                <label for="tuesday">Tuesday</label>
+            </div>
+            <div class="checkboxs">
+                <input class="checkbox sg_recurring" type="checkbox" name="Wednesday" id="Wednesday">
+                <label for="wednesday">Wednesday</label>
+            </div>
+            <div class="checkboxs">
+                <input class="checkbox sg_recurring" type="checkbox" name="Thursday" id="Thursday">
+                <label for="thursday">Thursday</label>
+            </div>
+            <div class="checkboxs">
+                <input class="checkbox sg_recurring" type="checkbox" name="Friday" id="Friday">
+                <label for="Friday">Friday</label>
+            </div>
+            <div class="checkboxs">
+                <input class="checkbox sg_recurring" type="checkbox" name="Saturday" id="Saturday">
+                <label for="Saturday">Saturday</label>
+             </div>
+            <div class="checkboxs">
+                <input class="checkbox sg_recurring" type="checkbox" name="Sunday" id="Sunday">
+                <label for="sunday">Sunday</label>
+            </div>
+       </fieldset>
+        <div class="field-group">
+            <label for="sg-planner-message">$i18n.getText("locale.jira.absenceplanner.message")</label>
+            <textarea class="textarea" name="message" id="sg-planner-message" placeholder="Short message here ..."></textarea>
+        </div>
+        #*
+            <div class="buttons-container">
+                <div class="buttons">
+                    <input class="button submit" type="submit" value="Save" id="sg-planner-addAbsenceEntry">
+                    <a class="cancel" href="#">Cancel</a>
+                </div>
+            </div>
+        *#
+    ##</fieldset>
+</form>
+</div>
+
+</div>
+    </div>
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            <input type="hidden" id="sg-planner-absenceId" />
+            <button class="aui-button aui-button-link" id="sg-planner-cancel-dialog"> Cancel </button>
+            <button id="sg-planner-addAbsenceEntry" class="aui-button aui-button-primary">Save</button>
+            <button id="sg-planner-addAbsenceEntryTest" class="aui-button aui-button-primary">test</button>
+            <button id="sg-planner-updateAbsenceEntry" style="display:none" class="aui-button aui-button-primary">Update</button>
+
+        </div>
+    </footer>
+</section>
+
+
+<aui-spinner size="large" id="sg-planner-userAbsenceHistory-loader"></aui-spinner>
+
+<div id="sg-planner-userAbsenceHistory" style="margin-top:60px">
+    #parse("templates/UserAbsenceHistory.vm")
+
+</div>
+##<h3> Hello Mr. $userFullName.<br/> here you can view or plan Absences.</h3>
+##$userOfProfile

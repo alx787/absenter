@@ -1,0 +1,73 @@
+$webResourceManager.requireResource("ru.sds.plugialo.absenter:issueview-resources")
+
+##<div style="margin-top:10px;margin-left:10px" title="User is out of the office - Absence Type: $userAbsenceEntry.getType() - From: $userAbsenceEntry.getPlannerDate($userAbsenceEntry.getStartDate()) To : $userAbsenceEntry.getPlannerDate($userAbsenceEntry.getEndDate()) -Message: $userAbsenceEntry.getMessage()" class="userAbsent-IssueLed"></div>
+
+
+<span data-aui-trigger aria-controls="sg-absenceDetails_$userName" class="$absenceClass sg_planner_status" >
+</span>
+#*<aui-inline-dialog id="sg-absenceDetails_$userName" responds-to="hover" style="width:350px">
+   
+<div id="sg-planner-absenceInfo">
+
+#if($userAbsenceEntry)
+
+<table class="aui">
+<tr>
+<td style="width:10%"> 
+   <div style="margin-top:10px;margin-left:10px" title="User is out of the office - Absence Type: $userAbsenceEntry.getType() - From: $userAbsenceEntry.getPlannerDate($userAbsenceEntry.getStartDate()) To : $userAbsenceEntry.getPlannerDate($userAbsenceEntry.getEndDate()) -Message: $userAbsenceEntry.getMessage()" class="userAbsent-IssueLed"></div>
+</td>
+<td> 
+            <div class="sg-planner-notAvailable" style="margin-top:05px">
+                #set($type=$userAbsenceEntry.getType())
+                        #if($type=="Others")
+                            <span class="aui-lozenge">Others</span>
+                        #elseif ($type=="Holiday" || $type=="Vacation")
+                            <span class="sg-planner-AbsenceInfo-icon" title="Holiday"> </span> <br/>
+                        #elseif($type=="Business Trip")
+                            <span class="sg-planner-business-trip" title="Business Trip"> </span><br/>
+                        #elseif($type=="Overtime reduction")
+                            <span class="sg-planner-overtime" title="Overtime reduction Trip"> </span> <br/>
+                        #elseif($type=="Maternity or Paternity")
+                            <span class="sg-planner-matpaternity" title="Maternity or Paternity"> </span> <br/>
+                        #elseif($type=="Conference")
+                            <span class="sg-planner-conference" title="Conference"> </span> <br/>
+                        #elseif($type=="Trade Fair")
+                            <span class="sg-planner-TradeFair" title="Trade Fair"> </span><br/>
+                        #elseif($type=="Training")
+                            <span class="sg-planner-training" title="Training"> </span> <br/>
+                        #elseif($type=="Sickness")
+                            <span class="sg-planner-illness" title="Sickness"> </span> <br/>
+                        #elseif($type=="Long Term Leave")
+                            <span class="sg-Long-term-leave" title="Long Term Leave"> </span> <br/>
+                        #else
+                        $type
+                       #end
+
+            </div>
+            </td>
+            <td>
+                <span style="font-size:11px;color:#505F79" > <b>From:</b>  $userAbsenceEntry.getPlannerDate($userAbsenceEntry.getStartDate()) <br/><b>To:</b> $userAbsenceEntry.getPlannerDate($userAbsenceEntry.getEndDate())</span>
+
+            </td>
+</tr>
+    
+</table>
+
+    #else
+        #if($isLoggedIn)
+            <div title="User is online since $lastLoginTime" style="margin-left:20px;margin-top:20px;" class="userOnline-led"></div>
+                        <span style="margin-left:10px"> User is available and online since $lastLoginTime </span>
+
+        #else
+            #if($lastLoginTime)
+            <div  title="Offline - User last login was on: $lastLoginTime" style="margin-left:20px;margin-top:20px;" class="userOffline-led"></div>
+           ## <p> Offline - User last login was on: $lastLoginTime </p>
+            #else
+            <div  title="User is offline" class="userOffline-led" style="margin-left:20px;margin-top:20px;"></div>
+        
+            #end
+             <span style="margin-left:10px"> User is not available #if($lastLoginTime) , last login was on: $lastLoginTime#end</span>
+        #end
+    #end
+</div>
+</aui-inline-dialog>*#

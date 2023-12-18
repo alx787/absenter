@@ -1,0 +1,223 @@
+.sgForm {
+    padding-left: 10px !important;
+}
+
+.sg-planner-AbsenceInfo-icon {
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    border: medium none;
+    display: inline-block;
+    height: 22px;
+    margin: 0;
+    padding: 5px;
+    text-align: left;
+    text-indent: -999em;
+    vertical-align: text-bottom;
+    width: 22px;
+    background: url("VacationIcon") no-repeat;
+
+}
+
+.sg-planner-business-trip {
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    border: medium none;
+    display: inline-block;
+    height: 22px;
+    margin: 0;
+    padding: 5px;
+    text-align: left;
+    text-indent: -999em;
+    vertical-align: text-bottom;
+    width: 22px;
+    background: url("business-trip") no-repeat;
+}
+
+
+.sg-planner-illness {
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    border: medium none;
+    display: inline-block;
+    height: 22px;
+    margin: 0;
+    padding: 5px;
+    text-align: left;
+    text-indent: -999em;
+    vertical-align: text-bottom;
+    width: 22px;
+    background: url("Sickness") no-repeat;
+}
+
+.sg-Long-term-leave {
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    border: medium none;
+    display: inline-block;
+    height: 22px;
+    margin: 0;
+    padding: 5px;
+    text-align: left;
+    text-indent: -999em;
+    vertical-align: text-bottom;
+    width: 22px;
+    background: url("Long_term_leave") no-repeat;
+}
+
+.userOnline-led {
+    margin: 0 auto;
+    width: 14px;
+    height: 14px;
+    background-color: #ABFF00;
+    border-radius: 50%;
+    display: inline-flex;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #89FF00 0 2px 12px;
+}
+
+.userAbsent-ledBlue {
+    margin: 0 auto;
+    width: 14px;
+    height: 14px;
+    background-color: #24E0FF;
+    border-radius: 50%;
+    display: inline-flex;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #006 0 -1px 9px, #3F8CFF 0 2px 14px;
+}
+
+.userAbsent-led {
+    margin: 0 auto;
+    width: 14px;
+    height: 14px;
+    background-color: #db2108ef;
+    border-radius: 50%;
+    display: inline-flex;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset rgb(233, 4, 4) 0 -1px 9px, #c7220def 0 2px 14px;
+}
+
+.userOffline-led {
+    margin: 0 auto;
+    width: 14px;
+    height: 14px;
+    background-color: rgb(226, 235, 236);
+    border-radius: 50%;
+    display: inline-flex;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #006 0 -1px 9px, rgb(165, 174, 189) 0 2px 14px;
+}
+
+.sg-planner-notAvailable {
+    display: inline-flex;
+}
+
+.sg-planner-recurringAbsence {
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    border: medium none;
+    display: inline-block;
+    height: 22px;
+    margin: 0;
+    padding: 5px;
+    text-align: left;
+    text-indent: -999em;
+    vertical-align: text-bottom;
+    width: 22px;
+    background: url("recurringAbsence") no-repeat;
+}
+
+.sg-planner-conference {
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    border: medium none;
+    display: inline-block;
+    height: 22px;
+    margin: 0;
+    padding: 5px;
+    text-align: left;
+    text-indent: -999em;
+    vertical-align: text-bottom;
+    width: 22px;
+    background: url("visitor") no-repeat;
+}
+
+.sg-planner-matpaternity {
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    border: medium none;
+    display: inline-block;
+    height: 22px;
+    margin: 0;
+    padding: 5px;
+    text-align: left;
+    text-indent: -999em;
+    vertical-align: text-bottom;
+    width: 22px;
+    background: url("stroller") no-repeat;
+}
+
+.sg-planner-overtime {
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    border: medium none;
+    display: inline-block;
+    height: 22px;
+    margin: 0;
+    padding: 5px;
+    text-align: left;
+    text-indent: -999em;
+    vertical-align: text-bottom;
+    width: 22px;
+    background: url("overtime") no-repeat;
+}
+
+.sg-planner-TradeFair {
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    border: medium none;
+    display: inline-block;
+    height: 22px;
+    margin: 0;
+    padding: 5px;
+    text-align: left;
+    text-indent: -999em;
+    vertical-align: text-bottom;
+    width: 22px;
+    background: url("tradefair") no-repeat;
+}
+
+.sg-planner-training {
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    border: medium none;
+    display: inline-block;
+    height: 22px;
+    margin: 0;
+    padding: 5px;
+    text-align: left;
+    text-indent: -999em;
+    vertical-align: text-bottom;
+    width: 22px;
+    background: url("training") no-repeat;
+}
+
+.sg-calView {
+    background: #8E1010;
+    color: aliceblue;
+}
+
+.sg-calView2 {
+    background: rgba(128, 3, 14, 0.541);
+    border: 1px solid rgb(186, 212, 67);
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+.sg-absences-cal {
+    max-width: 1200px;
+    width: auto;
+    height: 400px;
+    margin: 40px auto;
+}

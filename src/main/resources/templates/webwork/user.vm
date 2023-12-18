@@ -1,0 +1,14 @@
+<div class="userItem" style="" id="sgclonediv_0_users">
+    <div id="sgclonediv_0_inner_users" title="">
+        <span class="aui-icon aui-icon-small aui-iconfont-admin-roles" style="">User</span>
+        <span id="sgclonediv_0_inner_users_span"><b>User</b>: confluence-users</span>
+        <span class="aui-icon aui-icon-small aui-iconfont-delete userTrash" style="">Delete User</span>
+    </div>
+</div>
+<div class="userItem" style="" id="sgclonediv_1_users">
+    <div id="sgclonediv_1_inner_users" title="">
+        <span class="aui-icon aui-icon-small aui-iconfont-admin-roles" style="">User</span>
+        <span id="sgclonediv_1_inner_users_span"><b>User</b>: confluence-users</span>
+        <span class="aui-icon aui-icon-small aui-iconfont-delete userTrash" style="">Delete User</span>
+    </div>
+</div>

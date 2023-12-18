@@ -1,0 +1,188 @@
+$webResourceManager.requireResource("ru.sds.plugialo.absenter:planner-resources")
+
+##<script src="https://cdn.jsdelivr.net/npm/moment@latest/min/moment-with-locales.min.js"></script>
+
+<div class="aui-tabs horizontal-tabs">
+    <ul class="tabs-menu">
+        <li class="menu-item active-tab">
+            <a href="#sg-planner-tabs-absenceslist-tab">$i18n.getText("locale.jira.absenceplanner.listView")</a>
+        </li>
+        <li class="menu-item" id="sg-calendarView">
+            <a href="#sg-planner-tabs-absencescal-tab">$i18n.getText("locale.jira.absenceplanner.calView")</a>
+        </li>
+    </ul>
+    <div class="tabs-pane active-pane" id="sg-planner-tabs-absenceslist-tab">
+            <h2>$i18n.getText("locale.jira.absenceplanner.history.list.title")</h2>
+
+#if($userRegularAbsencesList && $userRegularAbsencesList.size()>0)
+    ##<h2> Recurring Abcenses </h2>
+     <div>
+        <table  class="aui">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Summary</th>
+                    <th>Type</th>
+                    <th>Days</th>
+                    <th>Message</th>
+                    #if($isEditor)
+                        <th>Actions</th>
+                    #end
+
+                </tr>
+            </thead>
+            <tbody>
+                #foreach($userAbsenceEntry in $userRegularAbsencesList)
+                    <tr>
+                         <td class="absenceId" sg-data="$userAbsenceEntry.getAbsenceId()">
+                            #if($userAbsenceEntry.getAbsenceId())
+                                $userAbsenceEntry.getAbsenceId()
+                            #else
+                                1
+                            #end
+                        </td>
+                        <td class="absenceSummary" sg-data="$userAbsenceEntry.getSummary()">
+                            $userAbsenceEntry.getSummary()
+                        </td>
+                        <td class="absenceType" sg-data="$userAbsenceEntry.getType()">
+                            <span class="sg-planner-recurringAbsence">Recurring </span>
+                        </td>
+                         <td class="absenceDays" sg-data="$userAbsenceEntry.getRecurringDays()">
+                            $userAbsenceEntry.getRecurringDays()
+                        </td>
+                        <td class="absenceMessage" sg-data="$userAbsenceEntry.getMessage()">
+                            $userAbsenceEntry.getMessage()
+                        </td>
+                        #if($isEditor)
+                        <td>
+                        #set($id= $userAbsenceEntry.getId())
+                            <span class="aui-icon aui-icon-small aui-iconfont-edit-filled sg-edit-rec-absence" sg-data-absid="$id" >Edit Absence</span>
+                            <span data-aui-trigger aria-controls="sg-cancel-confirm-dialog-$userAbsenceEntry.getAbsenceId()" style="color:#DE350B;float:right" class="aui-icon aui-icon-small aui-iconfont-cross sg-cancel-absence" sg-data-absid="$userAbsenceEntry.getAbsenceId()">Remove Absence</span>
+                            <aui-inline-dialog id="sg-cancel-confirm-dialog-$userAbsenceEntry.getAbsenceId()">
+                            <div><span  class="aui-icon aui-icon-small aui-iconfont-warning">Warning</span></div>
+                                <b> You choose to remove this absence entry, are you sure?
+                                <button class="aui-button aui-button-primary sg-confirm-no" sg-absenceid="$userAbsenceEntry.getAbsenceId()" >No</button>
+                                <button class="aui-button sg-confirm-yes" sg-absenceid="$userAbsenceEntry.getAbsenceId()">Yes</button>
+                            </aui-inline-dialog>
+                        </td>
+                        #end
+                    </tr>
+                #end
+            </tbody>
+        </table>
+    </div>
+
+    #end
+
+#if($userAbsencesList && $userAbsencesList.size()>0)
+
+
+    <h3>
+##$i18n.getText("locale.jira.absenceplanner.history.list.title"):
+    </h3>
+
+    <hr/>
+    <div>
+        <table  class="aui">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Summary</th>
+                <th>Type</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Message</th>
+                #if($isEditor)
+                    <th>Actions</th>
+                #end
+
+            </tr>
+            </thead>
+            <tbody>
+            #foreach($userAbsenceEntry in $userAbsencesList)
+                <tr>
+                    <td class="absenceId" sg-data="$userAbsenceEntry.getAbsenceId()">
+                    #if($userAbsenceEntry.getAbsenceId())
+                        $userAbsenceEntry.getAbsenceId()
+                    #else
+                        1
+                    #end
+                    </td>
+                    <td class="absenceSummary" sg-data="$userAbsenceEntry.getSummary()">
+                        $userAbsenceEntry.getSummary()
+                    </td>
+                    <td class="absenceType" sg-data="$userAbsenceEntry.getType()">
+                    
+                    <div class="sg-planner-notAvailable">
+                            #set($type= $userAbsenceEntry.getType())
+                         #if($type=="Others")
+                        <span class="aui-lozenge">Others</span>
+                        #elseif ($type=="Holiday" || $type=="Vacation")
+                            <span class="sg-planner-AbsenceInfo-icon" title="Holiday"> </span> $type<br/>
+                        #elseif($type=="Business Trip")
+                            <span class="sg-planner-business-trip" title="Business Trip"> </span>$type<br/>
+                        #elseif($type=="Overtime reduction")
+                            <span class="sg-planner-overtime" title="Overtime reduction Trip"> </span> $type<br/>
+                        #elseif($type=="Maternity or Paternity")
+                            <span class="sg-planner-matpaternity" title="Maternity or Paternity"> </span>$type <br/>
+                        #elseif($type=="Conference")
+                            <span class="sg-planner-conference" title="Conference"> </span> $type<br/>
+                        #elseif($type=="Trade Fair")
+                            <span class="sg-planner-TradeFair" title="Trade Fair"> </span>$type<br/>
+                        #elseif($type=="Training")
+                            <span class="sg-planner-training" title="Training"> </span> $type<br/>
+                        #elseif($type=="Sickness")
+                            <span class="sg-planner-illness" title="Sickness"> </span> $type<br/>
+                        #elseif($type=="Long Term Leave")
+                            <span class="sg-Long-term-leave" title="Long Term Leave"> </span> $type<br/>
+                        #else
+                        $type
+                       #end
+                       </div>
+                    </td>
+                    <td class="absenceStartDate" sg-data="$userAbsenceEntry.getPlannerDate($userAbsenceEntry.getStartDate())">
+                        ##$userAbsenceEntry.getStartDate()
+                        ##$plannerUtils
+                        ##$plannerUtils.getLocalDateFromEpoch($userAbsenceEntry.getStartDate()/1000)
+
+                        $userAbsenceEntry.getUIFormattedSate($userAbsenceEntry.getStartDate())
+
+                    </td>
+                    <td class="absenceEndDate" sg-data="$userAbsenceEntry.getPlannerDate($userAbsenceEntry.getEndDate())">
+                         $userAbsenceEntry.getUIFormattedSate($userAbsenceEntry.getEndDate())
+                       ##$userAbsenceEntry.getEndDate()
+                       ## $plannerUtils.getLocalDateFromEpoch($userAbsenceEntry.getEndDate())
+                        ##$userAbsenceEntry.getEndDate()
+                    </td>
+                    <td class="absenceMessage" sg-data="$userAbsenceEntry.getMessage()">
+                        $userAbsenceEntry.getMessage()
+                    </td>
+                    #if($isEditor)
+                    <td>
+                       #set($id= $userAbsenceEntry.getId())
+                        <span class="aui-icon aui-icon-small aui-iconfont-edit-filled sg-edit-absence" sg-data-absid="$id" >Edit Absence</span>
+                        <span data-aui-trigger aria-controls="sg-cancel-confirm-dialog-$userAbsenceEntry.getAbsenceId()" style="color:#DE350B;float:right" class="aui-icon aui-icon-small aui-iconfont-cross sg-cancel-absence" sg-data-absid="$userAbsenceEntry.getAbsenceId()">Remove Absence</span>
+                        <aui-inline-dialog id="sg-cancel-confirm-dialog-$userAbsenceEntry.getAbsenceId()">
+                        <div><span  class="aui-icon aui-icon-small aui-iconfont-warning">Warning</span></div>
+                            <b> You choose to remove this absence entry, are you sure?
+                            <button class="aui-button aui-button-primary sg-confirm-no" sg-absenceid="$userAbsenceEntry.getAbsenceId()" >No</button>
+                            <button class="aui-button sg-confirm-yes" sg-absenceid="$userAbsenceEntry.getAbsenceId()">Yes</button>
+                        </aui-inline-dialog>
+                    </td>
+                    #end
+                </tr>
+            #end
+            </tbody>
+        </table>
+    </div>
+#end 
+
+</div>
+    <div class="tabs-pane" id="sg-planner-tabs-absencescal-tab">
+        <h2>$i18n.getText("locale.jira.absenceplanner.history.cal.title")</h2>
+       <div id='calendar' class="sg-absences-cal"></div>
+    </div>
+</div>
+<script>
+
+</script>

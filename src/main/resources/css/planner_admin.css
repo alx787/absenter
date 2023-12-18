@@ -1,0 +1,33 @@
+.sgAddOption {
+    cursor: pointer;
+}
+
+.projectTrash {
+    margin-left: 5px;
+    color: #6b778c;
+    cursor: pointer;
+}
+
+.userTrash {
+    margin-left: 5px;
+    color: #6b778c;
+    cursor: pointer;
+}
+
+.groupTrash {
+    margin-left: 5px;
+    color: #6b778c;
+    cursor: pointer;
+}
+
+.sgUsersIcon {
+    margin-right: 5px;
+    color: #6b778c;
+}
+
+/*.sg_PlannerLogo {*/
+/*    width: 24px !important;*/
+/*    height: 24px !important;*/
+/*    display: inline-block;*/
+/*    background: url("pluginIcon") no-repeat top left;*/
+/*}*/

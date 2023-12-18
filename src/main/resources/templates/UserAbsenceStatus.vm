@@ -1,0 +1,10 @@
+$webResourceManager.requireResource("ru.sds.plugialo.absenter:planner-resources")
+<aui-spinner size="small" id="sg-planner-absence-status-loader"></aui-spinner>
+    <div id="sg-planner-absence-status">
+</div>
+
+<input type="hidden" id="profileUserName" value="$profileUser"/>
+<input type="hidden" id="sg-planner-reporter" value="$currentUser"/>
+<br/>
+
+<a href="$jira_base_url/secure/ViewProfile.jspa?name=$profileUser&selectedTab=ru.sds.plugialo.absenter:user-absenceplanner-panel" > Absence Planner </a>

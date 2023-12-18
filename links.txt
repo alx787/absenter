@@ -1,0 +1,33 @@
+https://developer.atlassian.com/platform/marketplace/declaring-marketing-assets-for-server-apps/
+https://checkserp.com/encode/unicode/
+
+
+https://www.base64encode.org/
+
+https://developer.atlassian.com/server/jira/platform/basic-authentication/
+
+Construct the authorization header
+If you need, you can construct and send the basic authorization header yourself as follows:
+
+Build a string of the form username:password.
+Encode the string to Base64.
+Supply an authorization header with format Authorization: Basic {encoded-string}. Make sure to replace {encoded-string} with your encoded string from Step 2.
+For example, if your username and password are both fred then the string "fred:fred" encodes to ZnJlZDpmcmVk in Base64. You can then make a request with cURL specifying the authorization header with -H as follows:
+
+Copy
+curl -H "Authorization: Basic ZnJlZDpmcmVk" -X GET -H "Content-Type: application/json" http://localhost:8080/rest
+
+
+[
+    {
+        "date": "2023-12-15",
+        "startDate": "2023-12-15",
+        "endDate": "2023-12-15",
+        "message": "сообщение",
+        "recurring": false,
+        "reportedBy": "admin",
+        "summary": "отсутствие какое то",
+        "type": "Business Trip",
+        "user": "admin"
+    }
+]

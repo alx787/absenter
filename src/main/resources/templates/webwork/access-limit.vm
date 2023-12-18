@@ -1,0 +1,82 @@
+<h3>App Access Limitations</h3>
+
+<div class="field-group">
+    <label for="sg-access-selected-groups">Groups:</label>
+    #set($jiraGroups = $action.getGroups())
+
+    <select id="sg-access-selected-groups" style="width:300px !important">
+        <option value="-1">Select Group</option>
+        #foreach($group in $jiraGroups)
+            <option value="$group">$group</option>
+        #end
+    </select>
+    <span class="sgAddOption" id="sgplanner_access_access_add_group_users">
+        <span class="aui-icon aui-icon-small aui-iconfont-add"></span>
+        Add
+    </span>
+    <div class="field-group">
+        <label>Access Groups</label>
+        <div id="sgplanner_access_display_div_users">
+            #if($PlannerConfig.getAccessGroups() && $PlannerConfig.getAccessGroups().length()>0)
+                #foreach($group in $PlannerConfig.getAccessGroups().split(","))
+                    <div class="groupItem" groupname="$group" style="" id="sgplanner_access_div_$velocityCount_users">
+                        <div id="sgplanner_access_div_$velocityCount_inner_users" title="">
+                            <span class="aui-icon aui-icon-small aui-iconfont-admin-roles sgUsersIcon" style="">Group</span>
+                            <span id="sgplanner_access_div_$velocityCount_inner_users_span">
+                                <b>Group</b>: $group</span>
+                            <span class="aui-icon aui-icon-small aui-iconfont-delete groupTrash" style="">Delete Group</span>
+                        </div>
+                    </div>
+                #end 
+            #end 
+        </div>
+
+    </div>
+    <div class="description">Only users in the selected groups are allowed to access and use the user absences planner
+       </div>
+</div>
+
+#*<div>
+        <div class="field-group">
+            <label for="sg_access_permittedUsers">Users :</label>
+            <select id="sg_access_permittedUsers" class="sg_access_permittedUsers" style="width:300px !important">
+                 <option value="-1"  selected=true>Select User</option>
+
+                #foreach($user in $PlannerConfig.getAccessUsers().split(","))
+                    #set($PlannerUser=$action.getPermittedUser($user))
+                    #if($PlannerUser)
+                    <option value="$PlannerUser.getName()"  >$PlannerUser.getDisplayName()</option>
+                    #end
+                #end
+            </select>
+            <span class="sgAddOption" id="sgplanner_access_add_user_users">
+                    <span class="aui-icon aui-icon-small aui-iconfont-add"></span>
+                    Add
+            </span>
+            <div class="field-group">
+                <label>Administrator Users</label>
+                <div id="sgplanner_access_display_div_permittedusers">
+                    #if($PlannerConfig.getAccessUsers() && $PlannerConfig.getAccessUsers().length()>0)
+                        #foreach($user in $PlannerConfig.getAccessUsers().split(","))
+                       
+                            #set($PlannerUser= $action.getPermittedUser($user))
+                            #if($!$PlannerUser)
+                                <div class="userItem" userName="$user" style="" >
+                                    <div  title="">
+                                        <span class="aui-icon aui-icon-small aui-iconfont-admin-roles sgUsersIcon" style="">User</span>
+                                        <span>
+                                            <b>User</b>: $PlannerUser.getDisplayName()</span>
+                                        <span class="aui-icon aui-icon-small aui-iconfont-delete userTrash" style="">Delete User</span>
+                                    </div>
+                                </div>
+
+                            #end
+                        #end 
+                    #end 
+                </div>
+            </div>
+           ## <input type="text" id="sg_access_permittedUsers" name="sg_access_permittedUsers" />
+            <div class="description">$i18n.getText("locale.jira.absenceplanner.access.desc")</div>
+        </div>
+
+</div>*#
