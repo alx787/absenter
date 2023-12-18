@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.Map;
 
 //import com.atlassian.plugins.rest.common.security.AnonymousAllowed;
-
 //import com.atlassian.jira.user.util.UserManager;
 
 //@UnrestrictedAccess
@@ -89,13 +88,14 @@ public class UserAbsencePlannerRest {
 //            "endDate": "2023-12-15",
 //        },
 
-//        log.warn(String.valueOf("list size: " + userAbsenceList.size()));
-
         absencePlannerService.clearAll();
 
         String resultString = "";
 
         for (UserAbsence2 userAbsence2 : userAbsenceList) {
+
+//            log.warn(userAbsence2.toString());
+
             UserAbsence userAbsence = new UserAbsence();
             userAbsence.setUser(userAbsence2.getUser());
             userAbsence.setReportedBy(userAbsence2.getReportedBy());
@@ -114,6 +114,9 @@ public class UserAbsencePlannerRest {
             userAbsence.setEndDate(endDateMls);
 
             UserAbsence userAbsenceResult = absencePlannerService.createUserAbsence(userAbsence);
+
+//            log.warn(userAbsenceResult.toString());
+
             if (userAbsenceResult == null) {
                 resultString = resultString + "Error when loading absence on " + userAbsence2.getUser()
                                             + " from " + userAbsence2.getStartDate()

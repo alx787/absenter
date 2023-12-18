@@ -14,7 +14,7 @@ $webResourceManager.requireResource("ru.sds.plugialo.absenter:issueview-resource
 <table class="aui">
 <tr>
 <td style="width:10%"> 
-   <div style="margin-top:10px;margin-left:10px" title="User is out of the office - Absence Type: $userAbsenceEntry.getType() - From: $userAbsenceEntry.getPlannerDate($userAbsenceEntry.getStartDate()) To : $userAbsenceEntry.getPlannerDate($userAbsenceEntry.getEndDate()) -Message: $userAbsenceEntry.getMessage()" class="userAbsent-IssueLed"></div>
+   <div style="margin-top:10px;margin-left:10px" title="$i18n.getText("locale.jira.absenceplanner.icon.reasontext"): $userAbsenceEntry.getType() - From: $userAbsenceEntry.getPlannerDate($userAbsenceEntry.getStartDate()) To : $userAbsenceEntry.getPlannerDate($userAbsenceEntry.getEndDate()) -Message: $userAbsenceEntry.getMessage()" class="userAbsent-IssueLed"></div>
 </td>
 <td> 
             <div class="sg-planner-notAvailable" style="margin-top:05px">

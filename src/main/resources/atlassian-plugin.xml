@@ -61,7 +61,7 @@
         <entity>ru.sds.plugialo.absenter.ao.AbsenceEntity</entity>
     </ao>
 
-    <view-profile-panel key="user-absenceplanner-panel" i18n-name-key="UserAbsencePlanner.panel.title"
+    <view-profile-panel key="user-absenceplanner-panel" i18n-name-key="locale.jira.absenceplanner.title"
                         name="User Absence Planner Panel" class="ru.sds.plugialo.absenter.ui.UserAbsencePanel">
         <resource type="velocity" name="view" location="templates/UserAbsencePlanner.vm"/>
         <param name="summary">true</param>
