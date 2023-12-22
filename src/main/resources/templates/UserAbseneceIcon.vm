@@ -60,10 +60,10 @@ $webResourceManager.requireResource("ru.sds.plugialo.absenter:issueview-resource
 
         #else
             #if($lastLoginTime)
-            <div  title="Offline - User last login was on: $lastLoginTime" style="margin-left:20px;margin-top:20px;" class="userOffline-led"></div>
-           ## <p> Offline - User last login was on: $lastLoginTime </p>
+                <div  title="Offline - User last login was on: $lastLoginTime" style="margin-left:20px;margin-top:20px;" class="userOffline-led"></div>
+            ## <p> Offline - User last login was on: $lastLoginTime </p>
             #else
-            <div  title="User is offline" class="userOffline-led" style="margin-left:20px;margin-top:20px;"></div>
+                <div  title="User is offline" class="userOffline-led" style="margin-left:20px;margin-top:20px;"></div>
         
             #end
              <span style="margin-left:10px"> User is not available #if($lastLoginTime) , last login was on: $lastLoginTime#end</span>

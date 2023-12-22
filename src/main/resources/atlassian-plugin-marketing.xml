@@ -3,7 +3,7 @@
     <compatibility>
         <product name="jira" min="8.0.0" max="8.16.0"/>
     </compatibility>
-    <logo image="images/Logo_RS.png"/>
+    <logo image="images/Logo_RS_144.png"/>
     <banner image="images/Logo_RS.png"/>
     <highlights>
         <highlight image="images/Logo_GTA5.png" cropped="images/Logo_GTA5.png"/>

@@ -124,14 +124,20 @@ AJS.toInit(function () {
     }
 
     hasAccess();
-    console.log(hasAccessToUAP);
+//    console.log(hasAccessToUAP);
 
     var assignEventWhenIssueRefresshed = function () {
 
         JIRA.bind(JIRA.Events.ISSUE_REFRESHED, function (e, context, reason) {
             if (AJS.$('.sg_planner_status').length == 0) {
+
+                // когда происходит ISSUE_REFRESHED, в документе прорисованы автор и исполнитель
+                // участники запроса и наблюдатели еще на добавлены, поэтому статусы на них не проставляются
+
                 AJS.$('.user-hover').each(function () {
                     var userName = AJS.$(this).attr("rel");
+//                    console.log("=======");
+//                    console.log(userName);
                     var contorl = AJS.$(this);
                     AJS.$.ajax({
                         type: "GET",

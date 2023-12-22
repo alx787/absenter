@@ -30,11 +30,12 @@
     box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 3px 1px, inset rgb(233, 4, 4) 0 -1px 4px, #c7220def 0 1px 6px;
   }
   .userOffline-IssueLed {
-    margin: 0 auto;
+/*    margin: 0 auto;
     width: 8px;
     height: 8px;
     background-color: rgb(226, 235, 236);
     border-radius: 50%;
     display: inline-flex;
     box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 3px 1px, inset #006 0 -1px 4px, rgb(165, 174, 189) 0 1px 6px;
+   */
   }

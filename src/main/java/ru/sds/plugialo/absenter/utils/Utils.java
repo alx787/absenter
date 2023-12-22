@@ -80,21 +80,21 @@ public class Utils {
     }
 
     public static boolean isUserOnline(ApplicationUser applicationUser) {
-        if (applicationUser != null) {
-            UserPropertyManager userPropertyManager = ComponentAccessor.getUserPropertyManager();
-            PropertySet ptSet = userPropertyManager.getPropertySetForUserKey(applicationUser.getKey());
-            return ptSet.getBoolean(userPropIsOnline);
-        }
+//        if (applicationUser != null) {
+//            UserPropertyManager userPropertyManager = ComponentAccessor.getUserPropertyManager();
+//            PropertySet ptSet = userPropertyManager.getPropertySetForUserKey(applicationUser.getKey());
+//            return ptSet.getBoolean(userPropIsOnline);
+//        }
         return false;
     }
 
     public static boolean isUserAvailabilitySet(ApplicationUser applicationUser) {
-        if (applicationUser != null) {
-            UserPropertyManager userPropertyManager = ComponentAccessor.getUserPropertyManager();
-            PropertySet ptSet = userPropertyManager.getPropertySetForUserKey(applicationUser.getKey());
-            if (ptSet.exists(userPropIsOnline))
-                return true;
-        }
+//        if (applicationUser != null) {
+//            UserPropertyManager userPropertyManager = ComponentAccessor.getUserPropertyManager();
+//            PropertySet ptSet = userPropertyManager.getPropertySetForUserKey(applicationUser.getKey());
+//            if (ptSet.exists(userPropIsOnline))
+//                return true;
+//        }
         return false;
     }
 
@@ -129,9 +129,9 @@ public class Utils {
     }
 
     public static void setUserAvailability(ApplicationUser applicationUser, boolean status) {
-        UserPropertyManager userPropertyManager = ComponentAccessor.getUserPropertyManager();
-        PropertySet ptSet = userPropertyManager.getPropertySetForUserKey(applicationUser.getKey());
-        ptSet.setBoolean("SG-PLANNER-ISONLINE", status);
+//        UserPropertyManager userPropertyManager = ComponentAccessor.getUserPropertyManager();
+//        PropertySet ptSet = userPropertyManager.getPropertySetForUserKey(applicationUser.getKey());
+//        ptSet.setBoolean(userPropIsOnline, status);
     }
 
     public static String[] getRecurringDays(String days) {
@@ -251,26 +251,26 @@ public class Utils {
     }
 
     public static String getSelectedAssignee(ApplicationUser applicationUser) {
-        if (applicationUser != null)
-            try {
-                UserPropertyManager userPropertyManager = ComponentAccessor.getUserPropertyManager();
-                PropertySet ptSet = userPropertyManager.getPropertySetForUserKey(applicationUser.getKey());
-                return ptSet.getString(userPropIsAssignee);
-            } catch (PropertyException pe) {
-                LogService.error(pe.getMessage());
-            }
+//        if (applicationUser != null)
+//            try {
+//                UserPropertyManager userPropertyManager = ComponentAccessor.getUserPropertyManager();
+//                PropertySet ptSet = userPropertyManager.getPropertySetForUserKey(applicationUser.getKey());
+//                return ptSet.getString(userPropIsAssignee);
+//            } catch (PropertyException pe) {
+//                LogService.error(pe.getMessage());
+//            }
         return null;
     }
 
     public static void setSelectedAssignee(ApplicationUser applicationUser, String userName) {
-        if (applicationUser != null)
-            try {
-                UserPropertyManager userPropertyManager = ComponentAccessor.getUserPropertyManager();
-                PropertySet ptSet = userPropertyManager.getPropertySetForUserKey(applicationUser.getKey());
-                ptSet.setString(userPropIsAssignee, userName);
-            } catch (PropertyException pe) {
-                LogService.error(pe.getMessage());
-            }
+//        if (applicationUser != null)
+//            try {
+//                UserPropertyManager userPropertyManager = ComponentAccessor.getUserPropertyManager();
+//                PropertySet ptSet = userPropertyManager.getPropertySetForUserKey(applicationUser.getKey());
+//                ptSet.setString(userPropIsAssignee, userName);
+//            } catch (PropertyException pe) {
+//                LogService.error(pe.getMessage());
+//            }
     }
 
     public static ApplicationUser getAlternateUser(ApplicationUser applicationUser) {

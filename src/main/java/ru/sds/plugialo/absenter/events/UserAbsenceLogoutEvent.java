@@ -39,11 +39,7 @@ public class UserAbsenceLogoutEvent implements InitializingBean, DisposableBean 
     @JiraImport
     private final PluginSettingsFactory pluginSettingsFactory;
 
-//    @JiraImport
-//    private ActiveObjects ao;
-
     private final AbsencePlannerService absencePlannerService;
-
 
     @Autowired
     public UserAbsenceLogoutEvent(EventPublisher eventPublisher, PluginSettingsFactory pluginSettingsFactory, AbsencePlannerService absencePlannerService) {
@@ -62,95 +58,94 @@ public class UserAbsenceLogoutEvent implements InitializingBean, DisposableBean 
 
     @EventListener
     public void onUserLogoutEvent(LogoutEvent logoutEvent) {
-        ApplicationUser applicationUser = logoutEvent.getUser();
-        UserPropertyManager userPropertyManager = ComponentAccessor.getUserPropertyManager();
-        PropertySet ptSet = userPropertyManager.getPropertySetForUserKey(applicationUser.getKey());
-        ptSet.setBoolean(Utils.userPropIsOnline, false);
+//        ApplicationUser applicationUser = logoutEvent.getUser();
+//        UserPropertyManager userPropertyManager = ComponentAccessor.getUserPropertyManager();
+//        PropertySet ptSet = userPropertyManager.getPropertySetForUserKey(applicationUser.getKey());
+//        ptSet.setBoolean(Utils.userPropIsOnline, false);
     }
 
     @EventListener
     public void onUserLogInEvent(LoginEvent loginEvent) {
-        ApplicationUser applicationUser = loginEvent.getUser();
-        UserPropertyManager userPropertyManager = ComponentAccessor.getUserPropertyManager();
-        PropertySet ptSet = userPropertyManager.getPropertySetForUserKey(applicationUser.getKey());
-        ptSet.setBoolean(Utils.userPropIsOnline, true);
+//        ApplicationUser applicationUser = loginEvent.getUser();
+//        UserPropertyManager userPropertyManager = ComponentAccessor.getUserPropertyManager();
+//        PropertySet ptSet = userPropertyManager.getPropertySetForUserKey(applicationUser.getKey());
+//        ptSet.setBoolean(Utils.userPropIsOnline, true);
     }
 
     @EventListener
     public void onUserSessionTimeoutEvent(SessionDestroyedEvent sessionDestroyedEvent) {
-        UserManager userManager = ComponentAccessor.getUserManager();
-        if (sessionDestroyedEvent != null && sessionDestroyedEvent.getUserName() != null) {
-            ApplicationUser applicationUser = userManager.getUserByName(sessionDestroyedEvent.getUserName());
-            UserPropertyManager userPropertyManager = ComponentAccessor.getUserPropertyManager();
-            PropertySet ptSet = userPropertyManager.getPropertySetForUserKey(applicationUser.getKey());
-            ptSet.setBoolean(Utils.userPropIsOnline, false);
-        }
+//        UserManager userManager = ComponentAccessor.getUserManager();
+//        if (sessionDestroyedEvent != null && sessionDestroyedEvent.getUserName() != null) {
+//            ApplicationUser applicationUser = userManager.getUserByName(sessionDestroyedEvent.getUserName());
+//            UserPropertyManager userPropertyManager = ComponentAccessor.getUserPropertyManager();
+//            PropertySet ptSet = userPropertyManager.getPropertySetForUserKey(applicationUser.getKey());
+//            ptSet.setBoolean(Utils.userPropIsOnline, false);
+//        }
     }
 
     @EventListener
     public void onUserSessionCreatedEvent(SessionCreatedEvent sessionCreatedEvent) {
-        UserManager userManager = ComponentAccessor.getUserManager();
-        if (sessionCreatedEvent != null && sessionCreatedEvent.getUserName() != null) {
-            ApplicationUser applicationUser = userManager.getUserByName(sessionCreatedEvent.getUserName());
-            UserPropertyManager userPropertyManager = ComponentAccessor.getUserPropertyManager();
-            PropertySet ptSet = userPropertyManager.getPropertySetForUserKey(applicationUser.getKey());
-            ptSet.setBoolean(Utils.userPropIsOnline, true);
-        }
+//        UserManager userManager = ComponentAccessor.getUserManager();
+//        if (sessionCreatedEvent != null && sessionCreatedEvent.getUserName() != null) {
+//            ApplicationUser applicationUser = userManager.getUserByName(sessionCreatedEvent.getUserName());
+//            UserPropertyManager userPropertyManager = ComponentAccessor.getUserPropertyManager();
+//            PropertySet ptSet = userPropertyManager.getPropertySetForUserKey(applicationUser.getKey());
+//            ptSet.setBoolean(Utils.userPropIsOnline, true);
+//        }
     }
 
     @EventListener
     public void onIssueEvent(IssueEvent issueEvent) {
-        Long eventTypeId = issueEvent.getEventTypeId();
-        Issue issue = issueEvent.getIssue();
-        if (eventTypeId.equals(EventType.ISSUE_UPDATED_ID) || eventTypeId.equals(EventType.ISSUE_ASSIGNED_ID) || eventTypeId.equals(EventType.ISSUE_CREATED_ID)) {
-            boolean assigneeChanged = false;
-            try {
-                for (Object item : issueEvent.getChangeLog().getRelated("ChildChangeItem")) {
-                    if (item.toString().contains("[field,assignee]"))
-                        assigneeChanged = true;
-                }
-            } catch (GenericEntityException e) {
-                LogService.error("Error getting change log" + e.getMessage());
-            }
-            if (assigneeChanged || eventTypeId.equals(EventType.ISSUE_ASSIGNED_ID)) {
-//                AbsenceService absenceService = new AbsenceService();
-                try {
-                    PlannerConfig plannerConfig = PlannerSecurityService.getCurrentSettings(this.pluginSettingsFactory);
-                    boolean isCommentDisabled = false;
-                    if (plannerConfig != null)
-                        isCommentDisabled = plannerConfig.isDisableAutoComment();
-
-                    if (issue.getAssignee() != null) {
-                        boolean isUserAbsent = AbsenceService.isUserAbsenceToday(absencePlannerService, issue.getAssignee().getUsername());
-
-                        if (isUserAbsent) {
-                            ApplicationUser applicationUser = issue.getAssignee();
-                            String alternate = Utils.getSelectedAssignee(issue.getAssignee());
-                            if (alternate != null && alternate.contains(":")) {
-                                String isAssignable = alternate.split(":")[1];
-                                boolean addComment = false;
-                                if ((alternate.split(":")).length == 3 && alternate.split(":")[2].equals("true") && !isCommentDisabled)
-                                    addComment = true;
-
-                                String message = AbsenceService.getAbsencesMessage(absencePlannerService, applicationUser.getUsername(), LocalDate.now().toEpochDay());
-
-                                if (isAssignable.equals("true")) {
+//        Long eventTypeId = issueEvent.getEventTypeId();
+//        Issue issue = issueEvent.getIssue();
+//        if (eventTypeId.equals(EventType.ISSUE_UPDATED_ID) || eventTypeId.equals(EventType.ISSUE_ASSIGNED_ID) || eventTypeId.equals(EventType.ISSUE_CREATED_ID)) {
+//            boolean assigneeChanged = false;
+//            try {
+//                for (Object item : issueEvent.getChangeLog().getRelated("ChildChangeItem")) {
+//                    if (item.toString().contains("[field,assignee]"))
+//                        assigneeChanged = true;
+//                }
+//            } catch (GenericEntityException e) {
+//                LogService.error("Error getting change log" + e.getMessage());
+//            }
+//            if (assigneeChanged || eventTypeId.equals(EventType.ISSUE_ASSIGNED_ID)) {
+//                try {
+//                    PlannerConfig plannerConfig = PlannerSecurityService.getCurrentSettings(this.pluginSettingsFactory);
+//                    boolean isCommentDisabled = false;
+//                    if (plannerConfig != null)
+//                        isCommentDisabled = plannerConfig.isDisableAutoComment();
 //
-                                    ApplicationUser alternateUser = Utils.getAlternateUser(applicationUser);
-                                    if (PlannerIssueService.updateIssueAssignee(issueEvent.getUser(), issue, alternateUser) && addComment)
-                                        AbsenceService.commentOnIssue(applicationUser, issueEvent.getIssue(), message + "\n  Issue is reassigned to: " + alternateUser.getDisplayName());
-                                } else if (addComment) {
-                                    AbsenceService.commentOnIssue(applicationUser, issueEvent.getIssue(), message);
-                                }
-                            }
-                        }
-                    } else {
-                        LogService.error(" ASSIGNEE OF THE ISSUE IS NULL");
-                    }
-                } catch (Exception e) {
-                    LogService.error("ERROR IN CATCHING ISSUE EVENTS");
-                }
-            }
-        }
+//                    if (issue.getAssignee() != null) {
+//                        boolean isUserAbsent = AbsenceService.isUserAbsenceToday(absencePlannerService, issue.getAssignee().getUsername());
+//
+//                        if (isUserAbsent) {
+//                            ApplicationUser applicationUser = issue.getAssignee();
+//                            String alternate = Utils.getSelectedAssignee(issue.getAssignee());
+//                            if (alternate != null && alternate.contains(":")) {
+//                                String isAssignable = alternate.split(":")[1];
+//                                boolean addComment = false;
+//                                if ((alternate.split(":")).length == 3 && alternate.split(":")[2].equals("true") && !isCommentDisabled)
+//                                    addComment = true;
+//
+//                                String message = AbsenceService.getAbsencesMessage(absencePlannerService, applicationUser.getUsername(), LocalDate.now().toEpochDay());
+//
+//                                if (isAssignable.equals("true")) {
+//
+//                                    ApplicationUser alternateUser = Utils.getAlternateUser(applicationUser);
+//                                    if (PlannerIssueService.updateIssueAssignee(issueEvent.getUser(), issue, alternateUser) && addComment)
+//                                        AbsenceService.commentOnIssue(applicationUser, issueEvent.getIssue(), message + "\n  Issue is reassigned to: " + alternateUser.getDisplayName());
+//                                } else if (addComment) {
+//                                    AbsenceService.commentOnIssue(applicationUser, issueEvent.getIssue(), message);
+//                                }
+//                            }
+//                        }
+//                    } else {
+//                        LogService.error(" ASSIGNEE OF THE ISSUE IS NULL");
+//                    }
+//                } catch (Exception e) {
+//                    LogService.error("ERROR IN CATCHING ISSUE EVENTS");
+//                }
+//            }
+//        }
     }
 }

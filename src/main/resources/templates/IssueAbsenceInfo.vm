@@ -56,18 +56,16 @@ $webResourceManager.requireResource("ru.sds.plugialo.absenter:planner-resources"
     
 </table>
 
-    #else
-        #if($isLoggedIn)
-            <div title="User is online since $lastLoginTime" style="margin-left:20px;margin-top:20px;" class="userOnline-led"></div></h3>
-        #else
-            #if($lastLoginTime)
-                <div title="Offline - User last login was on: $lastLoginTime" style="margin-left:20px;margin-top:20px;" class="userOffline-led"></div></h3>
-            #else
-                <div title="User is offline" class="userOffline-led" style="margin-left:20px;margin-top:20px;"></div></h3>
-            #end
-
-        #end
-        
-    
+##    #else
+##        #if($isLoggedIn)
+##            <div title="User is online since $lastLoginTime" style="margin-left:20px;margin-top:20px;" class="userOnline-led"></div></h3>
+##        #else
+##            #if($lastLoginTime)
+##                <div title="Offline - User last login was on: $lastLoginTime" style="margin-left:20px;margin-top:20px;" class="userOffline-led"></div></h3>
+##           #else
+##                <div title="User is offline" class="userOffline-led" style="margin-left:20px;margin-top:20px;"></div></h3>
+##            #end
+##        #end
     #end
+
 </div>
