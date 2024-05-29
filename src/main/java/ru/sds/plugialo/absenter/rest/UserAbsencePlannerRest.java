@@ -7,6 +7,7 @@ import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.util.VelocityParamFactory;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
+import com.atlassian.plugins.rest.common.security.UnrestrictedAccess;
 import com.atlassian.sal.api.message.I18nResolver;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 import com.atlassian.sal.api.user.UserManager;
@@ -34,7 +35,7 @@ import java.util.Map;
 //import com.atlassian.plugins.rest.common.security.AnonymousAllowed;
 //import com.atlassian.jira.user.util.UserManager;
 
-//@UnrestrictedAccess
+@UnrestrictedAccess
 @Path("/")
 public class UserAbsencePlannerRest {
 
@@ -68,7 +69,6 @@ public class UserAbsencePlannerRest {
     }
 
     @POST
-//    @UnrestrictedAccess
     @Path("refreshAllUsersAbsence")
     @Consumes({"application/json"})
     @Produces({"application/json"})
